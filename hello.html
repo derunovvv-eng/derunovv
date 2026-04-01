@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- Объявление типа документа - сообщает браузеру, что это HTML5 -->
+<html lang="ru">
+<!-- Корневой элемент страницы с указанием языка (русский) -->
+<head>
+    <!-- Мета-информация страницы, не отображается на экране -->
+    <meta charset="UTF-8">
+    <!-- Кодировка UTF-8 - поддерживает русские символы -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Адаптивность для мобильных устройств -->
+    <title>Моя страница</title>
+    <!-- Заголовок страницы - отображается во вкладке браузера -->
+    <style>
+        /* CSS-стили для оформления страницы */
+        body {
+            /* Стили для всего тела страницы */
+            font-family: Arial, sans-serif;
+            /* Шрифт - Arial, или любой без засечек */
+            max-width: 1400px;
+            /* Максимальная ширина контента */
+            margin: 0 auto;
+            /* Отступы: 0 сверху/снизу, авто по бокам (центровка) */
+            padding: 20px;
+            /* Внутренний отступ 20 пикселей */
+            min-height: 100vh;
+            /* Минимальная высота на весь экран */
+            color: white;
+            /* Белый цвет текста для всех элементов */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Градиентный фон: диагональный переход от фиолетового к пурпурному */
+            display: flex;
+            /* Гибкая раскладка для центрирования */
+            flex-direction: column;
+            /* Вертикальное направление */
+            justify-content: center;
+            /* Центрирование по вертикали */
+        }
+        h1 {
+            /* Стили для заголовка первого уровня */
+            color: white;
+            /* Белый цвет текста заголовка */
+            text-align: center;
+            /* Выравнивание текста по центру */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* Тень текста: смещение 2px, размытие 4px, полупрозрачный чёрный */
+            margin-bottom: 30px;
+            /* Нижний отступ 30 пикселей */
+            font-size: 4rem;
+            /* Размер шрифта 4rem (очень крупный) */
+            margin-top: 60px;
+            /* Верхний отступ 60 пикселей для опускания заголовка */
+        }
+        p {
+            /* Стили для параграфа */
+            line-height: 1.8;
+            /* Высота строки 1.8 для лучшей читаемости */
+            color: rgba(255, 255, 255, 0.95);
+            /* Почти белый цвет текста с небольшой прозрачностью */
+            font-size: 28px;
+            /* Размер шрифта 28 пикселей (увеличенный) */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Лёгкая тень текста для контраста */
+            text-align: center;
+            /* Выравнивание текста по центру */
+        }
+        .placeholder-img {
+            /* Класс для картинки-заглушки */
+            display: none;
+            /* Скрываем старый класс */
+        }
+        .gallery {
+            /* Старый класс галереи - больше не используется */
+            display: none;
+            /* Скрываем */
+        }
+        .gallery-container {
+            /* Контейнер для расположения изображений */
+            display: flex;
+            /* Гибкая раскладка */
+            justify-content: center;
+            /* Центрирование по горизонтали */
+            align-items: center;
+            /* Центрирование по вертикали */
+            gap: 20px;
+            /* Расстояние между элементами */
+            margin: 40px 0;
+            /* Отступы сверху и снизу */
+        }
+        .side-images {
+            /* Контейнер для боковых изображений */
+            display: flex;
+            /* Гибкая раскладка */
+            flex-direction: column;
+            /* Вертикальное расположение */
+            gap: 15px;
+            /* Расстояние между изображениями */
+        }
+        .side-img {
+            /* Стили для боковых изображений */
+            width: 280px;
+            /* Фиксированная ширина */
+            height: 180px;
+            /* Фиксированная высота */
+            object-fit: cover;
+            /* Заполнение без искажений */
+            border-radius: 15px;
+            /* Скруглённые углы */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            /* Тень */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Плавная анимация */
+        }
+        .side-img:hover {
+            /* Эффект при наведении на боковое изображение */
+            transform: translateY(-5px) scale(1.03);
+            /* Смещение вверх и увеличение */
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+            /* Увеличенная тень */
+        }
+        .main-img {
+            /* Стили для главного изображения */
+            width: 100%;
+            /* Ширина на весь контейнер */
+            max-width: 700px;
+            /* Максимальная ширина 700 пикселей */
+            height: 450px;
+            /* Фиксированная высота */
+            object-fit: cover;
+            /* Заполнение без искажений */
+            border-radius: 15px;
+            /* Скруглённые углы */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            /* Тень для объёма */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Плавная анимация */
+            cursor: pointer;
+            /* Курсор-указатель */
+        }
+        .main-img:hover {
+            /* Эффект при наведении на главное изображение */
+            transform: scale(1.02);
+            /* Увеличение */
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            /* Увеличенная тень */
+        }
+        button {
+            /* Стили для кнопки */
+            display: block;
+            /* Блочный элемент */
+            margin: 30px auto;
+            /* Отступы: 30px сверху/снизу, авто по бокам (центровка) */
+            padding: 15px 30px;
+            /* Внутренние отступы: 15px верх/низ, 30px лево/право */
+            font-size: 18px;
+            /* Размер шрифта 18 пикселей */
+            font-weight: bold;
+            /* Жирное начертание текста */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Градиентный фон кнопки */
+            color: white;
+            /* Белый цвет текста кнопки */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            /* Рамка: 2px, сплошная, полупрозрачный белый */
+            border-radius: 25px;
+            /* Скруглённые углы 25 пикселей */
+            cursor: pointer;
+            /* Курсор-указатель при наведении */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            /* Тень кнопки для объёма */
+            transition: all 0.3s ease;
+            /* Плавная анимация всех изменений 0.3 секунды */
+        }
+        button:hover {
+            /* Стили кнопки при наведении мыши */
+            transform: translateY(-3px);
+            /* Смещение кнопки вверх на 3 пикселя */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            /* Увеличенная тень при наведении */
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            /* Инвертированный градиент при наведении */
+        }
+        button:active {
+            /* Стили кнопки при нажатии */
+            transform: translateY(0);
+            /* Возврат кнопки в исходное положение */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            /* Уменьшенная тень при нажатии */
+        }
+    </style>
+</head>
+<body>
+    <!-- Тело страницы - видимый контент -->
+    <h1>Я люблю путешествия!</h1>
+    <!-- Заголовок первого уровня - главный заголовок страницы -->
+    
+    <p>
+        <!-- Параграф с текстовым контентом -->
+        Готов путешествовать каждый день!
+    </p>
+    <!-- Текстовый параграф с основным содержанием -->
+    
+    <div class="gallery-container">
+        <!-- Контейнер для расположения изображений: 2 слева, главное в центре, 2 справа -->
+        <div class="side-images left">
+            <!-- Левая колонка с двумя изображениями -->
+            <img src="../Desktop/1.jpg" alt="Изображение 1" class="side-img" onclick="openImage(this)" style="cursor: pointer;">
+            <!-- Первое боковое изображение слева -->
+            <img src="../Desktop/2.webp" alt="Изображение 2" class="side-img" onclick="openImage(this)" style="cursor: pointer;">
+            <!-- Второе боковое изображение слева -->
+        </div>
+        
+        <img src="../Desktop/1640893089_1-hdpic-club-p-samolet-kartinki-1.jpg" alt="Главное изображение" class="main-img" onclick="openMainImage(this)">
+        <!-- Главное центральное изображение -->
+        
+        <div class="side-images right">
+            <!-- Правая колонка с двумя изображениями -->
+            <img src="../Desktop/3.webp" alt="Изображение 3" class="side-img" onclick="openImage(this)" style="cursor: pointer;">
+            <!-- Первое боковое изображение справа -->
+            <img src="../Desktop/4.webp" alt="Изображение 4" class="side-img" onclick="openImage(this)" style="cursor: pointer;">
+            <!-- Второе боковое изображение справа -->
+        </div>
+    </div>
+    <!-- Конец галереи -->
+    
+    <button onclick="alert('Ура!')">Хочу во Вьетнам!</button>
+    <!-- Кнопка с обработчиком события: onclick выполняет JavaScript при клике -->
+    <script>
+        // JavaScript функции для открытия изображений
+        function openImage(img) {
+            // Функция для открытия боковых изображений в половину экрана
+            img.style.position = 'fixed';
+            img.style.top = '50%';
+            img.style.left = '50%';
+            img.style.transform = 'translate(-50%, -50%)';
+            img.style.width = '50vw';
+            img.style.height = '50vh';
+            img.style.maxWidth = '50vw';
+            img.style.maxHeight = '50vh';
+            img.style.objectFit = 'contain';
+            img.style.zIndex = '1000';
+            img.style.borderRadius = '0';
+            img.style.cursor = 'pointer';
+            // Двойной клик для закрытия
+            img.ondblclick = function() {
+                img.style.position = 'static';
+                img.style.transform = 'none';
+                img.style.width = '280px';
+                img.style.height = '180px';
+                img.style.maxWidth = '280px';
+                img.style.maxHeight = 'none';
+                img.style.objectFit = 'cover';
+                img.style.zIndex = 'auto';
+                img.style.borderRadius = '15px';
+                img.ondblclick = null;
+            };
+        }
+        function openMainImage(img) {
+            // Функция для открытия главного изображения на весь экран
+            img.style.position = 'fixed';
+            img.style.top = '0';
+            img.style.left = '0';
+            img.style.width = '100vw';
+            img.style.height = '100vh';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            img.style.zIndex = '1000';
+            img.style.borderRadius = '0';
+            img.style.cursor = 'pointer';
+            // Двойной клик для закрытия
+            img.ondblclick = function() {
+                img.style.position = 'static';
+                img.style.width = '100%';
+                img.style.height = '450px';
+                img.style.maxWidth = '700px';
+                img.style.maxHeight = 'none';
+                img.style.objectFit = 'cover';
+                img.style.zIndex = 'auto';
+                img.style.borderRadius = '15px';
+                img.style.transform = 'none';
+                img.ondblclick = null;
+            };
+        }
+    </script>
+</body>
+</html>
+<!-- Закрывающий тег html - конец документа -->
