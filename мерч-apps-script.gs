@@ -174,6 +174,14 @@ function createOrder(data) {
 }
 
 function decrementStock(items) {
+  adjustStock(items, -1);
+}
+
+function restoreStock(items) {
+  adjustStock(items, 1);
+}
+
+function adjustStock(items, sign) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME_PRODUCTS);
   const data = sheet.getDataRange().getValues();
 
@@ -181,7 +189,7 @@ function decrementStock(items) {
     const rowIndex = data.findIndex(row => row[0] == item.productId);
     if (rowIndex > 0) {
       const currentStock = data[rowIndex][4];
-      const newStock = Math.max(0, currentStock - item.quantity);
+      const newStock = Math.max(0, currentStock + sign * item.quantity);
       sheet.getRange(rowIndex + 1, 5).setValue(newStock);
     }
   });
@@ -201,13 +209,23 @@ function updateOrderStatus(data) {
     const ordersData = sheet.getDataRange().getValues();
     
     const rowIndex = ordersData.findIndex(row => row[0] == data.orderId);
-    
+
     if (rowIndex <= 0) {
       return jsonResponse({ success: false, error: 'Order not found' }, 404);
     }
-    
+
+    const previousStatus = ordersData[rowIndex][6];
+
+    // Возвращаем остатки на склад при отмене заказа, который ещё не был отменён
+    if (data.status === 'cancelled' && previousStatus !== 'cancelled') {
+      try {
+        const items = JSON.parse(ordersData[rowIndex][4]);
+        restoreStock(items);
+      } catch (err) {}
+    }
+
     sheet.getRange(rowIndex + 1, 7).setValue(data.status);
-    
+
     return jsonResponse({ success: true });
     
   } catch (error) {
