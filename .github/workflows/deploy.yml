@@ -3,14 +3,6 @@ name: Deploy to Yandex Cloud
 on:
   push:
     branches: [main]
-    paths:
-      - 'каталог-мерча-красивый.html'
-      - 'админка-мерча.html'
-      - '*.jpg'
-      - '*.jpeg'
-      - '*.png'
-      - '*.avif'
-      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy:
