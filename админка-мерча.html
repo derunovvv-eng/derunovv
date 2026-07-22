@@ -461,9 +461,9 @@
 
     <div class="admin-container">
         <div class="admin-tabs">
-            <button class="admin-tab active" onclick="switchTab('orders')">📦 Заказы</button>
-            <button class="admin-tab" onclick="switchTab('products')">📋 Товары</button>
-            <button class="admin-tab" onclick="switchTab('stats')">📊 Статистика</button>
+            <button class="admin-tab active" onclick="switchTab('orders', event)">📦 Заказы</button>
+            <button class="admin-tab" onclick="switchTab('products', event)">📋 Товары</button>
+            <button class="admin-tab" onclick="switchTab('stats', event)">📊 Статистика</button>
         </div>
 
         <!-- Панель заказов -->
@@ -634,11 +634,11 @@
         }
 
         // Переключение вкладок
-        function switchTab(tabName) {
+        function switchTab(tabName, evt) {
             document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.admin-panel').forEach(panel => panel.classList.remove('active'));
 
-            event.target.classList.add('active');
+            evt.target.classList.add('active');
             document.getElementById(tabName + 'Panel').classList.add('active');
 
             if (tabName === 'orders') loadOrders();
