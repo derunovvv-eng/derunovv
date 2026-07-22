@@ -3775,6 +3775,20 @@
                         image: image
                     };
 
+                    // Обновляем отображаемый остаток и максимум для поля количества
+                    // живыми данными из API (иначе цифра всегда оставалась статичной из HTML)
+                    if (stockEl) {
+                        stockEl.textContent = product.stock + ' шт.';
+                    }
+                    const quantityInput = card.querySelector('.quantity-input');
+                    if (quantityInput) {
+                        quantityInput.max = product.stock;
+                        if (parseInt(quantityInput.value) > product.stock) {
+                            quantityInput.value = Math.max(product.stock, 0);
+                        }
+                        quantityInput.disabled = product.stock <= 0;
+                    }
+
                     // Создаём кнопку
                     const btn = document.createElement('button');
                     btn.className = 'btn-add-to-cart';
