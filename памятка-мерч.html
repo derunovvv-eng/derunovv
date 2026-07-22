@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памятка по получению мерча</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 .icon {
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .steps {
+            counter-reset: step;
+        }
+
+        .steps li {
+            padding-left: 50px;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            counter-increment: step;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .merch-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .merch-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .merch-item .emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .merch-item h3 {
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-box a {
+            color: white;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .contact-box p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .merch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 Памятка по получению мерча</h1>
+            <p>Всё, что нужно знать о получении фирменного мерча</p>
+        </header>
+
+        <nav class="nav">
+            <a href="#conditions">Условия</a>
+            <a href="#process">Процесс</a>
+            <a href="#merch">Список мерча</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+
+        <div class="content">
+            <section id="conditions">
+                <h2><span class="icon">📋</span> Условия получения</h2>
+                <ul>
+                    <li>Мерч могут получить все сотрудники компании</li>
+                    <li>Новые сотрудники получают приветственный набор после испытательного срока</li>
+                    <li>За дополнительный мерч нужно накопить внутренние баллы</li>
+                    <li>Некоторые позиции доступны только за особые достижения</li>
+                    <li>Мерч выдаётся лично в руки при предъявлении пропуска</li>
+                </ul>
+            </section>
+
+            <section id="process">
+                <h2><span class="icon">🚀</span> Процесс получения</h2>
+                <ul class="steps">
+                    <li>Заполните заявку в внутреннем портале</li>
+                    <li>Дождитесь подтверждения от HR-менеджера (1-2 рабочих дня)</li>
+                    <li>Получите уведомление о готовности мерча</li>
+                    <li>Приходите в офис в рабочее время</li>
+                    <li>Обратитесь на ресепшн с пропуском</li>
+                    <li>Подпишите акт приёма-передачи</li>
+                    <li>Получите мерч и наслаждайтесь!</li>
+                </ul>
+            </section>
+
+            <section id="merch">
+                <h2><span class="icon">👕</span> Список мерча</h2>
+                <div class="merch-grid">
+                    <div class="merch-item">
+                        <div class="emoji">👕</div>
+                        <h3>Футболки</h3>
+                        <p>Размеры: XS–XXL</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">🧥</div>
+                        <h3>Худи</h3>
+                        <p>Тёплые и уютные</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">🎒</div>
+                        <h3>Рюкзаки</h3>
+                        <p>Для ноутбука 15"</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">☕</div>
+                        <h3>Кружки</h3>
+                        <p>Керамика, 350 мл</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">📝</div>
+                        <h3>Блокноты</h3>
+                        <p>Фирменный стиль</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">🏷️</div>
+                        <h3>Стикеры</h3>
+                        <p>Наборы по 10 шт</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">🧢</div>
+                        <h3>Кепки</h3>
+                        <p>One size</p>
+                    </div>
+                    <div class="merch-item">
+                        <div class="emoji">🎧</div>
+                        <h3>Шопперы</h3>
+                        <p>Эко-сумки</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacts">
+                <h2><span class="icon">📞</span> Контакты</h2>
+                <div class="contact-box">
+                    <p><strong>HR-отдел:</strong> <a href="mailto:hr@company.com">hr@company.com</a></p>
+                    <p><strong>Телефон:</strong> <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                    <p><strong>Telegram:</strong> <a href="https://t.me/company_hr">@company_hr</a></p>
+                    <p><strong>Часы работы:</strong> Пн–Пт, 10:00–19:00</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>© 2026 Компания. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

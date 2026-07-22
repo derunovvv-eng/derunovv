@@ -1,0 +1,3190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Каталог мерча | Ростелеком</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Предзагрузка изображений для быстрой загрузки -->
+    <link rel="preload" as="image" href="images/notebook.png">
+    <link rel="preload" as="image" href="images/blanket.png">
+    <link rel="preload" as="image" href="images/mousepad.png">
+    <link rel="preload" as="image" href="images/raincoat.png">
+    <link rel="preload" as="image" href="images/backpack.png">
+    <link rel="preload" as="image" href="images/shopper.png">
+    <link rel="preload" as="image" href="images/diffuser.png">
+    <link rel="preload" as="image" href="images/tshirt-black.png">
+    <link rel="preload" as="image" href="images/tshirt-white.png">
+    <link rel="preload" as="image" href="images/hoodie-white.png">
+    <link rel="preload" as="image" href="images/hoodie-smile.png">
+    <link rel="preload" as="image" href="images/tshirt-smile.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Глобальное улучшение рендеринга */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: #101828;
+            background: #F1F3F5;
+            min-height: 100vh;
+        }
+
+        /* Header с логотипом IT-Team */
+        .rt-header {
+            background: white;
+            color: #101828;
+            padding: 0 20px;
+            border-bottom: 2px solid #E3E8EC;
+        }
+
+        .rt-header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .rt-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rt-logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(16, 24, 40, 0.08);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        @media (min-width: 1400px) {
+            .merch-catalog {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
+        @media (min-width: 1800px) {
+            .merch-catalog {
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            }
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 79, 18, 0.2);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 79, 18, 0.15);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 0;
+            background: #fff;
+            border-bottom: 3px solid #7700FF;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(119, 0, 255, 0.1);
+        }
+
+        .nav a {
+            padding: 16px 24px;
+            color: #101828;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .nav a:hover {
+            background: #F1F3F5;
+            border-bottom-color: #FF4F12;
+            color: #FF4F12;
+        }
+
+        .nav a.active {
+            background: #7700FF;
+            color: white;
+            border-bottom-color: #7700FF;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 48px;
+            padding: 32px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #E3E8EC;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: #7700FF;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #FF4F12;
+        }
+
+        h2 .icon {
+            font-size: 1.3em;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(119, 0, 255, 0.25);
+            color: white;
+        }
+
+        .info-box {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border: 2px solid #7700FF;
+            box-shadow: 0 4px 16px rgba(119, 0, 255, 0.12);
+            position: relative;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .info-box p {
+            margin-bottom: 16px;
+            font-size: 1em;
+            color: #101828;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: #FF4F12;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Каталог мерча - стили по бренд-буку */
+        .catalog-filters {
+            margin-bottom: 32px;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(119, 0, 255, 0.1);
+            border: 1px solid #E3E8EC;
+        }
+
+        .search-box {
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #E3E8EC;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #7700FF;
+            box-shadow: 0 0 0 3px rgba(119, 0, 255, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #E3E8EC;
+            background: white;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            border-color: #FF4F12;
+            color: #FF4F12;
+        }
+
+        .filter-btn.active {
+            background: #7700FF;
+            color: white;
+            border-color: #7700FF;
+        }
+
+        .merch-catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .merch-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #E3E8EC;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .merch-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(119, 0, 255, 0.15);
+            border-color: #7700FF;
+        }
+
+        .merch-card.hidden {
+            display: none;
+        }
+
+        .merch-photo {
+            height: 200px;
+            background: 
+                radial-gradient(circle at center, #ffffff 0%, #F1F3F5 70%, #E3E8EC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Тонкая рамка для чёткости */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .merch-photo:hover {
+            background: 
+                radial-gradient(circle at center, #ffffff 0%, #E3E8EC 70%, #D0D5DC 100%);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(119, 0, 255, 0.1);
+        }
+
+        .merch-photo::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 2em;
+            opacity: 0;
+            transition: all 0.3s ease;
+            background: rgba(119, 0, 255, 0.9);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .merch-photo:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .merch-photo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Улучшение качества отображения изображений */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            /* Фильтры для улучшения чёткости и контраста */
+            filter: contrast(1.05) saturate(1.1) brightness(1.02);
+            /* Сглаживание краёв */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .merch-photo:hover img {
+            /* zaostrenie pri navidenii */
+            filter: contrast(1.1) saturate(1.15) brightness(1.05) sharpen(0.2);
+        }
+
+        .photo-placeholder {
+            font-size: 4em;
+            opacity: 0.7;
+        }
+
+        .merch-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .merch-category-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-basic .merch-category-badge {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .category-medium .merch-category-badge {
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+
+        .category-premium .merch-category-badge {
+            background: #FCE4EC;
+            color: #C2185B;
+        }
+
+        .merch-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 8px;
+        }
+
+        .merch-description {
+            font-size: 0.9em;
+            color: #70747E;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .merch-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.8em;
+            padding-top: 16px;
+            border-top: 1px solid #E3E8EC;
+        }
+
+        .merch-details span {
+            background: #F1F3F5;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #404653;
+            font-weight: 500;
+        }
+
+        .merch-stock {
+            background: #E3F2FD !important;
+            color: #1976D2 !important;
+            font-weight: 600;
+        }
+
+        .merch-size {
+            background: #F3E5F5 !important;
+            color: #7B1FA2 !important;
+        }
+
+        .merch-color {
+            background: #FFF8E1 !important;
+            color: #F57C00 !important;
+        }
+
+        /* Селектор размеров */
+        .size-selector {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #E3E8EC;
+        }
+
+        .size-selector label {
+            display: block;
+            font-size: 0.85em;
+            color: #404653;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .size-select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #E3E8EC;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .size-select:focus {
+            outline: none;
+            border-color: #7700FF;
+        }
+
+        /* Важная информация */
+        #important-info h2 {
+            color: #7700FF;
+            border-bottom-color: #FF9800;
+        }
+
+        .important-info-box {
+            border: 2px solid #7700FF;
+            background: white;
+            box-shadow: 0 4px 16px rgba(119, 0, 255, 0.15);
+            position: relative;
+        }
+
+        .important-info-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #7700FF;
+            align-items: flex-start;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-item:first-child {
+            padding-top: 0;
+        }
+
+        .info-icon {
+            font-size: 2.2em;
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(119, 0, 255, 0.3);
+            color: white;
+        }
+
+        .info-text strong {
+            display: block;
+            color: #101828;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+
+        .info-text p {
+            color: #404653;
+            font-size: 0.95em;
+            margin: 0;
+        }
+
+        /* Количество в карточке */
+        .quantity-selector {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #E3E8EC;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-selector label {
+            font-size: 0.85em;
+            color: #404653;
+            font-weight: 600;
+        }
+
+        .quantity-input {
+            width: 70px;
+            padding: 8px 12px;
+            border: 2px solid #E3E8EC;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: #7700FF;
+        }
+
+        /* Модальное окно товара */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-modal.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .product-modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 95%;
+            max-width: 1350px;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .product-modal.open .product-modal-content {
+            transform: scale(1);
+        }
+
+        .product-modal-image {
+            background: 
+                radial-gradient(circle at center, #ffffff 0%, #F1F3F5 70%, #E3E8EC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            min-height: 400px;
+            overflow: hidden;
+            cursor: zoom-in;
+            position: relative;
+        }
+
+        .product-modal-image.zoomed {
+            cursor: move;
+        }
+
+        .product-modal-image img,
+        .product-modal-image .photo-placeholder {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.1s ease;
+            transform-origin: center center;
+            user-select: none;
+            /* Улучшение качества отображения в модальном окне */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            filter: contrast(1.08) saturate(1.12) brightness(1.03) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .product-modal-image.zoomed img,
+        .product-modal-image.zoomed .photo-placeholder {
+            transform: scale(2.5) translate(var(--translate-x, 0), var(--translate-y, 0));
+            /* Дополнительная резкость при увеличении */
+            filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+        }
+
+        .product-modal-image .zoom-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .product-modal-image:hover .zoom-hint {
+            opacity: 1;
+        }
+
+        .product-modal-image .drag-hint {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(119, 0, 255, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .product-modal-image.zoomed:hover .drag-hint {
+            opacity: 1;
+        }
+
+        .product-modal-info {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #101828;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-modal-close:hover {
+            background: #7700FF;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .product-modal-category {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-modal-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 12px;
+        }
+
+        .product-modal-description {
+            font-size: 1em;
+            color: #70747E;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .product-modal-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .product-modal-details span {
+            background: #F1F3F5;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            color: #404653;
+            font-weight: 500;
+        }
+
+        .product-modal-stock {
+            background: #E3F2FD !important;
+            color: #1976D2 !important;
+            font-weight: 600;
+        }
+
+        .product-modal-size {
+            background: #F3E5F5 !important;
+            color: #7B1FA2 !important;
+        }
+
+        .product-modal-color {
+            background: #FFF8E1 !important;
+            color: #F57C00 !important;
+        }
+
+        .product-modal-actions {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid #E3E8EC;
+        }
+
+        .product-modal-size-selector {
+            margin-bottom: 16px;
+        }
+
+        .product-modal-size-selector label {
+            display: block;
+            font-size: 0.9em;
+            color: #404653;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .product-modal-size-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E3E8EC;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .product-modal-size-selector select:focus {
+            outline: none;
+            border-color: #7700FF;
+        }
+
+        .product-modal-quantity {
+            margin-bottom: 16px;
+        }
+
+        .product-modal-quantity label {
+            display: block;
+            font-size: 0.9em;
+            color: #404653;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .product-modal-quantity input {
+            width: 100px;
+            padding: 12px 16px;
+            border: 2px solid #E3E8EC;
+            border-radius: 8px;
+            font-size: 1em;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .product-modal-quantity input:focus {
+            outline: none;
+            border-color: #7700FF;
+        }
+
+        .btn-add-to-cart-modal {
+            width: 100%;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .btn-add-to-cart-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(119, 0, 255, 0.3);
+        }
+
+        /* Плавающая кнопка корзины */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #FF4F12 0%, #E0410F 100%);
+            border: none;
+            color: white;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(255, 79, 18, 0.4);
+            transition: all 0.3s ease;
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8) translateY(20px);
+        }
+
+        .floating-cart-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+
+        .floating-cart-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 79, 18, 0.5);
+        }
+
+        .floating-cart-btn:active {
+            transform: scale(1.05);
+        }
+
+        .floating-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #7700FF;
+            color: white;
+            font-size: 0.5em;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 12px;
+            min-width: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(119, 0, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .product-modal-content {
+                grid-template-columns: 1fr;
+                max-height: 95vh;
+            }
+
+            .product-modal-image {
+                min-height: 250px;
+                padding: 30px;
+            }
+
+            .product-modal-info {
+                padding: 24px;
+            }
+
+            .product-modal-title {
+                font-size: 1.4em;
+            }
+        }
+
+        /* Calculator Styles */
+        .calculator {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(119, 0, 255, 0.12);
+            margin-top: 24px;
+            border: 2px solid #7700FF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .calculator h3 {
+            color: #101828;
+            margin-bottom: 24px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #101828;
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E3E8EC;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #7700FF;
+            box-shadow: 0 0 0 3px rgba(119, 0, 255, 0.1);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(119, 0, 255, 0.3);
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 24px;
+            background: #F1F3F5;
+            border-radius: 12px;
+            border: 2px solid #7700FF;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-box h4 {
+            color: #7700FF;
+            margin-bottom: 16px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #E3E8EC;
+            font-size: 0.95em;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .calculator-note {
+            margin-top: 20px;
+            padding: 16px;
+            background: #FFF8E1;
+            border-radius: 8px;
+            border-left: 4px solid #FF9800;
+            font-size: 0.85em;
+            color: #404653;
+        }
+
+        /* Footer с логотипом IT-Team */
+        .rt-footer {
+            background: white;
+            color: #101828;
+            padding: 24px 40px;
+            text-align: center;
+            border-top: 2px solid #E3E8EC;
+        }
+
+        .rt-footer .rt-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rt-footer .rt-logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Кнопка корзины в шапке */
+        .cart-btn-header {
+            background: #FF4F12;
+            border: 2px solid #FF4F12;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(255, 79, 18, 0.3);
+        }
+
+        .cart-btn-header:hover {
+            background: #E0410F;
+            border-color: #E0410F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 79, 18, 0.4);
+        }
+
+        #cartCount {
+            background: #FF4F12;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+
+        /* Модальное окно корзины */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            max-width: 100%;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            pointer-events: auto;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            pointer-events: auto;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        .cart-header {
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+
+        .cart-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background 0.3s ease;
+        }
+
+        .cart-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #E3E8EC;
+            background: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 1000;
+            pointer-events: none;
+            flex-shrink: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-footer .btn-checkout,
+        .cart-footer .btn-clear-cart {
+            pointer-events: auto;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #F1F3F5;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: #E3E8EC;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: #101828;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-qty button {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #E3E8EC;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item-qty button:hover {
+            background: #7700FF;
+            color: white;
+            border-color: #7700FF;
+        }
+
+        .cart-item-qty span {
+            font-weight: 600;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            margin-left: auto;
+            background: #F44336;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.2s ease;
+        }
+
+        .cart-item-remove:hover {
+            background: #D32F2F;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #70747E;
+        }
+
+        .cart-empty-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #E3E8EC;
+            background: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .cart-total span:last-child {
+            color: #7700FF;
+        }
+
+        .btn-clear-cart {
+            width: 100%;
+            background: white;
+            color: #F44336;
+            border: 2px solid #F44336;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .btn-clear-cart:hover {
+            background: #F44336;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-clear-cart:disabled {
+            background: #E3E8EC;
+            border-color: #E3E8EC;
+            color: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            position: relative;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(119, 0, 255, 0.3);
+        }
+
+        .btn-checkout:disabled {
+            background: #E3E8EC;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        /* Форма оформления заказа */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-modal.open {
+            display: flex;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            z-index: 10;
+        }
+
+        .checkout-header {
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-header h3 {
+            margin: 0;
+        }
+
+        .checkout-body {
+            padding: 24px;
+            padding-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #orderForm {
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #101828;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E3E8EC;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #7700FF;
+            box-shadow: 0 0 0 3px rgba(119, 0, 255, 0.1);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+            border-color: #FF4F12;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .order-summary {
+            background: #F1F3F5;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .order-summary h4 {
+            margin-bottom: 12px;
+            color: #7700FF;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E3E8EC;
+            font-size: 0.9em;
+        }
+
+        .order-summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            padding-top: 12px;
+            margin-top: 8px;
+            border-top: 2px solid #7700FF;
+        }
+
+        .btn-submit-order {
+            width: 100%;
+            background: linear-gradient(135deg, #FF4F12 0%, #e04310 100%);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 14px rgba(255, 79, 18, 0.3);
+            position: relative;
+            z-index: 100;
+            pointer-events: auto;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .btn-submit-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 79, 18, 0.4);
+        }
+
+        .btn-submit-order:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit-order:disabled {
+            background: #E3E8EC;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            background: #4CAF50;
+        }
+
+        .notification.error {
+            background: #F44336;
+        }
+
+        .notification.info {
+            background: #2196F3;
+        }
+
+        /* Кнопка "В корзину" для товаров */
+        .btn-add-to-cart {
+            width: 100%;
+            background: linear-gradient(135deg, #7700FF 0%, #5a00cc 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 12px;
+        }
+
+        .btn-add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(119, 0, 255, 0.3);
+        }
+
+        .btn-add-to-cart:disabled {
+            background: #E3E8EC;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-add-to-cart.out-of-stock {
+            background: #9E9E9E;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+
+            .cart-btn-header span {
+                display: none;
+            }
+
+            .checkout-content {
+                width: 95%;
+                margin: 10px;
+            }
+
+            .notification {
+                bottom: 90px;
+                right: 20px;
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .rt-header-top {
+                height: 56px;
+            }
+
+            .rt-logo {
+                font-size: 1em;
+            }
+
+            .rt-logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .page-header {
+                padding: 40px 24px;
+            }
+
+            .page-header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 24px;
+            }
+
+            section {
+                padding: 24px;
+            }
+
+            h2 {
+                font-size: 1.25em;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+            }
+
+            .nav a {
+                padding: 12px 16px;
+                font-size: 0.8em;
+            }
+
+            .merch-catalog {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator {
+                padding: 24px;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .filter-btn {
+                font-size: 0.75em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    <!-- SVG фильтры для улучшения качества изображений -->
+    <svg style="display: none;">
+        <defs>
+            <filter id="sharpen">
+                <feConvolveMatrix order="3" preserveAlpha="true"
+                    kernelMatrix="0 -1 0
+                                  -1 5 -1
+                                  0 -1 0"/>
+            </filter>
+            <filter id="enhance">
+                <feColorMatrix type="matrix" values="
+                    1.1 0 0 0 0
+                    0 1.1 0 0 0
+                    0 0 1.1 0 0
+                    0 0 0 1 0"/>
+                <feComponentTransfer>
+                    <feFuncR type="linear" slope="1.05"/>
+                    <feFuncG type="linear" slope="1.05"/>
+                    <feFuncB type="linear" slope="1.05"/>
+                </feComponentTransfer>
+            </filter>
+        </defs>
+    </svg>
+</head>
+<body>
+    <!-- Шапка с логотипом IT-Team -->
+    <header class="rt-header">
+        <div class="rt-header-top">
+            <div class="rt-logo">
+                <img src="IT-Team_color_black.png" alt="IT-Team">
+            </div>
+            <button class="cart-btn-header" onclick="toggleCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Каталог мерча</h1>
+            <p>Корпоративный мерч для сотрудников</p>
+        </div>
+
+        <nav class="nav">
+            <a href="#how-to">Как получить</a>
+            <a href="#calculator">Калькулятор</a>
+            <a href="#important-info">Инфо</a>
+            <a href="#categories">Категории</a>
+        </nav>
+
+        <div class="content">
+            <section id="how-to">
+                <h2><span class="icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 13H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 17H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 9H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span> Как получить мерч?</h2>
+                <div class="info-box">
+                    <p>В <span class="highlight">2026 году</span> у каждого департамента/ЦК есть <strong>лимит на получение мерча</strong> разных категорий под локальные цели подразделения.</p>
+                    <p>Лимит рассчитывается, <strong>исходя из численности департамента/ЦК</strong>.</p>
+                    <p>Далее вы сможете рассчитать лимит в калькуляторе и ознакомиться с каталогом мерча.</p>
+                </div>
+            </section>
+
+            <section id="calculator">
+                <h2><span class="icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 6H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 14H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 14H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 18H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 18H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </span> Калькулятор лимита мерча</h2>
+                <div class="calculator">
+                    <h3>Рассчитайте лимит для вашего подразделения</h3>
+
+                    <div class="form-group">
+                        <label for="employees">Численность сотрудников (человек):</label>
+                        <input type="number" id="employees" min="1" placeholder="Введите количество сотрудников">
+                    </div>
+
+                    <button class="btn-calculate" onclick="calculateLimit()">Рассчитать лимит</button>
+
+                    <div class="result-box" id="resultBox">
+                        <h4>Доступное количество мерча</h4>
+                        <div id="resultContent"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="important-info">
+                <h2><span class="icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L1 21H23L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span> Важная информация</h2>
+                <div class="info-box important-info-box">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M3 9H21" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 21V9" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <strong>Мы выдадим вам сразу весь лимит подразделения</strong>
+                            <p>Вы сможете распределить его на год самостоятельно</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 21V7L14 3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H18C19.1 21 20 20.1 20 19V21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 21V17C4 15.8954 4.89543 15 6 15H14C15.1046 15 16 15.8954 16 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="8" cy="9" r="2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <strong>Доставка за пределы Москвы</strong>
+                            <p>Учитывайте, что может занимать около 10 рабочих дней</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="categories">
+                <h2><span class="icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 7H16V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7H4C2.9 7 2 7.9 2 9V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V9C22 7.9 21.1 7 20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 3V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 11H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 11H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span> Каталог мерча</h2>
+                
+                <!-- Фильтр и поиск -->
+                <div class="catalog-filters">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Поиск мерча..." oninput="filterMerch()">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterCategory('all')">Все</button>
+                        <button class="filter-btn" onclick="filterCategory('basic')">🟢 Базовый</button>
+                        <button class="filter-btn" onclick="filterCategory('medium')">🟠 Средний</button>
+                        <button class="filter-btn" onclick="filterCategory('premium')">🟣 Премиум</button>
+                    </div>
+                </div>
+
+                <div class="merch-catalog" id="merchCatalog">
+                    <!-- Базовый мерч -->
+                    <div class="merch-card category-basic" data-category="basic">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/notebook.png" alt="Блокнот" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟢 Базовый</div>
+                            <h3 class="merch-title">Блокнот</h3>
+                            <p class="merch-description">Корпоративный блокнот для записей</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">7 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="7">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-basic" data-category="basic">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="remuvka.png" alt="Ремувка" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟢 Базовый</div>
+                            <h3 class="merch-title">Ремувка</h3>
+                            <p class="merch-description">Ластик для удаления записей</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">70 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="70">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-basic" data-category="basic">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="bottle.png" alt="Бутылка для воды" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟢 Базовый</div>
+                            <h3 class="merch-title">Бутылка для воды</h3>
+                            <p class="merch-description">Спортивная бутылка для воды</p>
+                            <div class="merch-details">
+                                <span class="merch-color">🟠 Оранжевый</span>
+                                <span class="merch-stock">500 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-basic" data-category="basic">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/blanket.png" alt="Плед" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟢 Базовый</div>
+                            <h3 class="merch-title">Плед</h3>
+                            <p class="merch-description">Мягкий плед для уюта</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚪ Белый</span>
+                                <span class="merch-stock">70 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="70">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-basic" data-category="basic">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/mousepad.png" alt="Коврик для мыши" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟢 Базовый</div>
+                            <h3 class="merch-title">Коврик для мышки</h3>
+                            <p class="merch-description">Коврик для компьютерной мыши</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">55 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="55">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Средний мерч -->
+                    <div class="merch-card category-medium" data-category="medium">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/raincoat.png" alt="Фиолетовый дождевик" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟠 Средний</div>
+                            <h3 class="merch-title">Фиолетовый дождевик</h3>
+                            <p class="merch-description">Лёгкий дождевик для защиты от дождя</p>
+                            <div class="merch-details">
+                                <span class="merch-color">🟣 Фиолетовый</span>
+                                <span class="merch-stock">28 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="28">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-medium" data-category="medium">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/backpack.png" alt="Рюкзак" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟠 Средний</div>
+                            <h3 class="merch-title">Рюкзак</h3>
+                            <p class="merch-description">Городской рюкзак для повседневного использования</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">19 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="19">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-medium" data-category="medium">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/shopper.png" alt="Шоппер прозрачный" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟠 Средний</div>
+                            <h3 class="merch-title">Шоппер прозрачный</h3>
+                            <p class="merch-description">Удобная сумка-шоппер</p>
+                            <div class="merch-details">
+                                <span class="merch-color">🔍 Прозрачный</span>
+                                <span class="merch-stock">30 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-medium" data-category="medium">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/diffuser.png" alt="Диффузор" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟠 Средний</div>
+                            <h3 class="merch-title">Диффузор</h3>
+                            <p class="merch-description">Ароматический диффузор для помещения</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">70 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="70">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-medium" data-category="medium">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <div class="photo-placeholder">✈️</div>
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟠 Средний</div>
+                            <h3 class="merch-title">Подушка для самолёта</h3>
+                            <p class="merch-description">Дорожная подушка для путешествий</p>
+                            <div class="merch-details">
+                                <span class="merch-stock">45 шт.</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="45">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Премиум мерч -->
+                    <div class="merch-card category-premium" data-category="premium" data-has-sizes="true">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/tshirt-black.png" alt="Футболка чёрная" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟣 Премиум</div>
+                            <h3 class="merch-title">Футболка чёрная</h3>
+                            <p class="merch-description">Качественная футболка из натурального хлопка</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">62 шт.</span>
+                            </div>
+                            <div class="size-selector">
+                                <label>Размер:</label>
+                                <select class="size-select">
+                                    <option value="XS">XS (ост. 1 шт.)</option>
+                                    <option value="M-L" selected>M-L (ост. 50 шт.)</option>
+                                    <option value="XL-XXL">XL-XXL (ост. 11 шт.)</option>
+                                </select>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="62">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-premium" data-category="premium" data-has-sizes="true">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/tshirt-white.png" alt="Футболка белая" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟣 Премиум</div>
+                            <h3 class="merch-title">Футболка белая</h3>
+                            <p class="merch-description">Качественная футболка из натурального хлопка</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚪ Белый</span>
+                                <span class="merch-stock">89 шт.</span>
+                            </div>
+                            <div class="size-selector">
+                                <label>Размер:</label>
+                                <select class="size-select">
+                                    <option value="XS-S">XS-S (ост. 20 шт.)</option>
+                                    <option value="M-L" selected>M-L (ост. 40 шт.)</option>
+                                    <option value="XL-XXL">XL-XXL (ост. 29 шт.)</option>
+                                </select>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="89">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-premium" data-category="premium" data-has-sizes="true">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/hoodie-white.png" alt="Худи белое" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟣 Премиум</div>
+                            <h3 class="merch-title">Худи белое</h3>
+                            <p class="merch-description">Тёплое худи для комфортной носки</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚪ Белый</span>
+                                <span class="merch-stock">21 шт.</span>
+                            </div>
+                            <div class="size-selector">
+                                <label>Размер:</label>
+                                <select class="size-select">
+                                    <option value="XS-S">XS-S (ост. 8 шт.)</option>
+                                    <option value="M-L" selected>M-L (ост. 12 шт.)</option>
+                                    <option value="XL-XXL">XL-XXL (ост. 1 шт.)</option>
+                                </select>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="21">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-premium" data-category="premium" data-has-sizes="true">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/hoodie-smile.png" alt="Худи со смайликом" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟣 Премиум</div>
+                            <h3 class="merch-title">Худи со смайликом</h3>
+                            <p class="merch-description">Стильное худи с принтом смайлика</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">43 шт.</span>
+                            </div>
+                            <div class="size-selector">
+                                <label>Размер:</label>
+                                <select class="size-select">
+                                    <option value="XS-S">XS-S (ост. 8 шт.)</option>
+                                    <option value="ML-L" selected>ML-L (ост. 11 шт.)</option>
+                                    <option value="XL-2XL">XL-2XL (ост. 24 шт.)</option>
+                                </select>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="43">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merch-card category-premium" data-category="premium" data-has-sizes="true">
+                        <div class="merch-photo" onclick="openProductModal(this)">
+                            <img src="images/tshirt-smile.png" alt="Футболка со смайликом" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="merch-info">
+                            <div class="merch-category-badge">🟣 Премиум</div>
+                            <h3 class="merch-title">Футболка со смайликом</h3>
+                            <p class="merch-description">Футболка с весёлым принтом</p>
+                            <div class="merch-details">
+                                <span class="merch-color">⚫ Черный</span>
+                                <span class="merch-stock">38 шт.</span>
+                            </div>
+                            <div class="size-selector">
+                                <label>Размер:</label>
+                                <select class="size-select">
+                                    <option value="XS-S">XS-S (ост. 7 шт.)</option>
+                                    <option value="ML-L" selected>ML-L (ост. 7 шт.)</option>
+                                    <option value="XL-2XL">XL-2XL (ост. 24 шт.)</option>
+                                </select>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Кол-во:</label>
+                                <input type="number" class="quantity-input" value="1" min="1" max="38">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="rt-footer">
+            <div class="rt-logo">
+                <img src="IT-Team_color_black.png" alt="IT-Team">
+            </div>
+        </footer>
+    </div>
+
+    <!-- Плавающая кнопка корзины -->
+    <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()">
+        🛒
+        <span class="floating-cart-count" id="floatingCartCount">0</span>
+    </button>
+
+    <!-- Корзина -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>🛒 Корзина</h3>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <p>Корзина пуста</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Добавьте товары из каталога</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="btn-clear-cart" id="btnClearCart" onclick="clearCart()">
+                🗑️ Очистить корзину
+            </button>
+            <button class="btn-checkout" id="btnCheckout" onclick="openCheckout()" disabled>
+                Оформить заказ
+            </button>
+        </div>
+    </div>
+
+    <!-- Форма оформления заказа -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h3>📦 Оформление заказа</h3>
+                <button class="cart-close" onclick="closeCheckout()">✕</button>
+            </div>
+            <div class="checkout-body">
+                <div class="order-summary" id="orderSummary">
+                    <h4>Ваш заказ:</h4>
+                    <div id="orderSummaryItems"></div>
+                </div>
+
+                <form id="orderForm" onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label for="orderName">ФИО *</label>
+                        <input type="text" id="orderName" required placeholder="Иванов Иван Иванович">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderPhone">Телефон *</label>
+                        <input type="tel" id="orderPhone" required placeholder="+7 (999) 000-00-00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderEmployees">Количество человек в департаменте *</label>
+                        <input type="number" id="orderEmployees" required placeholder="Например: 25" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderDepartment">Департамент / ЦК *</label>
+                        <input type="text" id="orderDepartment" required placeholder="Например: Отдел разработки">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderComment">Комментарий</label>
+                        <textarea id="orderComment" placeholder="Дополнительная информация к заказу"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-order" id="btnSubmitOrder">
+                        Подтвердить заказ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно товара -->
+    <div class="product-modal" id="productModal" onclick="if(event.target === this) closeProductModal()">
+        <button class="product-modal-close" onclick="closeProductModal()">✕</button>
+        <div class="product-modal-content">
+            <div class="product-modal-image" id="modalImage" onclick="toggleZoom(event)">
+                <div class="zoom-hint">🔍 Нажмите для увеличения</div>
+                <div class="drag-hint">👆 Перетащите для перемещения</div>
+            </div>
+            <div class="product-modal-info">
+                <span class="product-modal-category" id="modalCategory">🟢 Базовый</span>
+                <h2 class="product-modal-title" id="modalTitle">Название товара</h2>
+                <p class="product-modal-description" id="modalDescription">Описание товара</p>
+                <div class="product-modal-details" id="modalDetails">
+                </div>
+                <div class="product-modal-actions">
+                    <div class="product-modal-size-selector" id="modalSizeSelector" style="display: none;">
+                        <label>Размер:</label>
+                        <select class="size-select" id="modalSizeSelect">
+                        </select>
+                    </div>
+                    <div class="product-modal-quantity">
+                        <label>Количество:</label>
+                        <input type="number" id="modalQuantity" value="1" min="1" max="100">
+                    </div>
+                    <button class="btn-add-to-cart-modal" id="modalAddToCart">
+                        🛒 Добавить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Подсветка активного пункта меню при скролле
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Функция расчёта лимита (данные из Калькулятор мерча.xlsx)
+        function calculateLimit() {
+            const employees = parseInt(document.getElementById('employees').value);
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+
+            if (!employees || employees < 1) {
+                alert('Пожалуйста, введите численность сотрудников корректно');
+                return;
+            }
+
+            // Коэффициенты из Excel (лимит на 1 сотрудника)
+            const coefficients = {
+                basic: 1 / 4,      // Может получить каждый 4 сотрудник
+                medium: 1 / 8,     // Может получить каждый 8 сотрудник
+                premium: 1 / 10    // Может получить каждый 10 сотрудник
+            };
+
+            const basicLimit = Math.floor(employees * coefficients.basic);
+            const mediumLimit = Math.floor(employees * coefficients.medium);
+            const premiumLimit = Math.floor(employees * coefficients.premium);
+
+            resultContent.innerHTML = `
+                <div class="result-item">
+                    <span>🟢 Базовый мерч:</span>
+                    <span>${basicLimit} шт. (каждый 4 сотрудник)</span>
+                </div>
+                <div class="result-item">
+                    <span>🟠 Средний мерч:</span>
+                    <span>${mediumLimit} шт. (каждый 8 сотрудник)</span>
+                </div>
+                <div class="result-item">
+                    <span>🟣 Премиум мерч:</span>
+                    <span>${premiumLimit} шт. (каждый 10 сотрудник)</span>
+                </div>
+            `;
+
+            resultBox.classList.add('show');
+        }
+
+        // Фильтрация по категориям
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.merch-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Обновляем активную кнопку
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Фильтруем карточки
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Поиск мерча
+        function filterMerch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.merch-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('.merch-title').textContent.toLowerCase();
+                const description = card.querySelector('.merch-description').textContent.toLowerCase();
+                const category = card.querySelector('.merch-category-badge').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm) || category.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // ==========================================
+        // МАГАЗИН МЕРЧА - КОРЗИНА И ЗАКАЗЫ
+        // ==========================================
+
+        // URL Google Apps Script (замените на свой после настройки)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ВАШ_ID_СКРИПТА/exec';
+        const API_KEY = 'rt_merch_secret_key_2026';
+
+        // Корзина
+        let cart = [];
+        try {
+            const savedCart = localStorage.getItem('merchCart');
+            if (savedCart) {
+                const parsed = JSON.parse(savedCart);
+                // Очищаем корзину если там старые данные с URL
+                if (!parsed[0]?.image?.includes('%')) {
+                    cart = parsed;
+                }
+            }
+        } catch (e) {
+            console.log('Cart parse error, starting fresh');
+        }
+        let products = [];
+
+        // Инициализация магазина
+        document.addEventListener('DOMContentLoaded', function() {
+            // Очищаем старую корзину с неправильными путями к изображениям
+            try {
+                const savedCart = localStorage.getItem('merchCart');
+                if (savedCart) {
+                    const parsed = JSON.parse(savedCart);
+                    // Проверяем есть ли товары с изображениями без пути
+                    const hasOldFormat = parsed.some(item => 
+                        item.image && 
+                        item.image.includes('.') && 
+                        !item.image.includes('/')
+                    );
+                    if (hasOldFormat) {
+                        localStorage.removeItem('merchCart');
+                        cart = [];
+                    } else {
+                        cart = parsed;
+                    }
+                }
+            } catch (e) {
+                console.log('Cart parse error, starting fresh');
+            }
+            
+            updateCartCount();
+            loadProducts();
+            
+            // Показ плавающей кнопки корзины при прокрутке
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            if (floatingCartBtn) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 400) {
+                        floatingCartBtn.classList.add('visible');
+                    } else {
+                        floatingCartBtn.classList.remove('visible');
+                    }
+                });
+            }
+        });
+
+        // Загрузка товаров из Google Sheets
+        async function loadProducts() {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getProducts');
+                const data = await response.json();
+
+                if (data.success && data.products) {
+                    products = data.products;
+                    renderProducts();
+                } else {
+                    console.log('Используем локальные данные');
+                    renderProducts();
+                }
+            } catch (error) {
+                console.log('Ошибка загрузки товаров:', error);
+                renderProducts();
+            }
+        }
+
+        // Рендер товаров с кнопками
+        function renderProducts() {
+            const cards = document.querySelectorAll('.merch-card');
+
+            cards.forEach((card, index) => {
+                // Проверяем, есть ли уже кнопка
+                if (!card.querySelector('.btn-add-to-cart')) {
+                    const merchInfo = card.querySelector('.merch-info');
+                    const stockEl = card.querySelector('.merch-stock');
+                    const title = card.querySelector('.merch-title').textContent;
+
+                    // Получаем изображение (emoji или img)
+                    const imgEl = card.querySelector('.merch-photo img');
+                    const emojiEl = card.querySelector('.photo-placeholder');
+                    const image = imgEl ? imgEl.src : (emojiEl ? emojiEl.textContent : '📦');
+
+                    // Находим товар в данных
+                    const product = products.find(p => p.name === title) || {
+                        id: index + 1,
+                        name: title,
+                        stock: parseInt(stockEl.textContent) || 0,
+                        image: image
+                    };
+
+                    // Создаём кнопку
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-add-to-cart';
+                    btn.onclick = () => addToCart(product, card);
+
+                    if (product.stock <= 0) {
+                        btn.disabled = true;
+                        btn.textContent = 'Нет в наличии';
+                        btn.classList.add('out-of-stock');
+                    } else if (product.stock < 5) {
+                        btn.textContent = `В корзину (ост. ${product.stock} шт.)`;
+                    } else {
+                        btn.textContent = 'В корзину';
+                    }
+
+                    merchInfo.appendChild(btn);
+                }
+            });
+        }
+
+        // Добавление в корзину
+        function addToCart(product, card) {
+            // Получаем выбранный размер если есть
+            const sizeSelect = card?.querySelector('.size-select');
+            const selectedSize = sizeSelect ? sizeSelect.value : null;
+
+            // Получаем количество из поля ввода
+            const quantityInput = card?.querySelector('.quantity-input');
+            let quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+            if (quantity < 1) quantity = 1;
+            if (quantity > product.stock) quantity = product.stock;
+
+            // Получаем изображение (только emoji или имя файла)
+            const imgEl = card.querySelector('.merch-photo img');
+            const emojiEl = card.querySelector('.photo-placeholder');
+            let image = '📦';
+            if (imgEl) {
+                // Если это локальное изображение, берём только имя файла
+                const src = imgEl.getAttribute('src') || imgEl.src;
+                image = src.includes('/') ? src.split('/').pop() : src;
+                // Добавляем префикс images/ если это файл изображения
+                if (image.includes('.') && !image.startsWith('images/')) {
+                    image = 'images/' + image;
+                }
+            } else if (emojiEl) {
+                image = emojiEl.textContent;
+            }
+
+            // Создаём уникальный ID для товара с размером
+            const cartItemId = selectedSize ? `${product.id}-${selectedSize}` : product.id;
+            const itemName = selectedSize ? `${product.name} (размер: ${selectedSize})` : product.name;
+
+            const existingItem = cart.find(item => item.id === cartItemId);
+
+            if (existingItem) {
+                if (existingItem.quantity + quantity <= product.stock) {
+                    existingItem.quantity += quantity;
+                    showNotification(`Добавлено ${quantity} шт. в корзину`, 'success');
+                } else {
+                    showNotification('Превышено доступное количество', 'error');
+                    return;
+                }
+            } else {
+                cart.push({
+                    id: cartItemId,
+                    productId: product.id,
+                    name: itemName,
+                    baseName: product.name,
+                    size: selectedSize,
+                    price: product.price || 0,
+                    image: image,
+                    quantity: quantity,
+                    maxStock: product.stock
+                });
+                showNotification(`Добавлено ${quantity} шт. в корзину`, 'success');
+            }
+
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+
+        // Сохранение корзины
+        function saveCart() {
+            localStorage.setItem('merchCart', JSON.stringify(cart));
+        }
+
+        // Обновление счётчика корзины
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+            
+            // Обновляем счётчик на плавающей кнопке
+            const floatingCount = document.getElementById('floatingCartCount');
+            if (floatingCount) {
+                floatingCount.textContent = count;
+            }
+        }
+
+        // Открытие/закрытие корзины
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            modal.classList.toggle('open');
+            overlay.classList.toggle('open');
+            renderCart();
+        }
+
+        // Очистка корзины
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('Вы уверены, что хотите очистить корзину?')) {
+                cart = [];
+                saveCart();
+                updateCartCount();
+                renderCart();
+                showNotification('Корзина очищена', 'info');
+            }
+        }
+
+        // Рендер корзины
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const btnCheckout = document.getElementById('btnCheckout');
+            const btnClearCart = document.getElementById('btnClearCart');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <p>Корзина пуста</p>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Добавьте товары из каталога</p>
+                    </div>
+                `;
+                cartTotal.textContent = '0 товаров';
+                btnCheckout.disabled = true;
+                if (btnClearCart) btnClearCart.disabled = true;
+                return;
+            }
+
+            let totalItems = 0;
+            cartItems.innerHTML = cart.map(item => {
+                totalItems += item.quantity;
+
+                // Определяем как отображать изображение
+                let imageDisplay;
+                if (item.image && item.image.includes('.')) {
+                    // Это файл изображения -确保 правильный путь
+                    let imagePath = item.image;
+                    // Если путь не начинается с images/ или ./, добавляем images/
+                    if (!imagePath.startsWith('images/') && !imagePath.startsWith('./images/')) {
+                        imagePath = 'images/' + imagePath.replace(/^images\//, '');
+                    }
+                    imageDisplay = `<img src="${imagePath}" alt="" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none';this.parentNode.textContent='📦';">`;
+                } else {
+                    // Это emoji
+                    imageDisplay = item.image || '📦';
+                }
+
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${imageDisplay}</div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-controls">
+                                <div class="cart-item-qty">
+                                    <button onclick="updateCartQty('${item.id}', -1)">−</button>
+                                    <span>${item.quantity} шт.</span>
+                                    <button onclick="updateCartQty('${item.id}', 1)">+</button>
+                                </div>
+                                <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            cartTotal.textContent = totalItems + ' шт.';
+            btnCheckout.disabled = false;
+            if (btnClearCart) btnClearCart.disabled = false;
+        }
+
+        // Обновление количества в корзине
+        function updateCartQty(productId, change) {
+            const item = cart.find(item => item.id == productId);
+            if (!item) return;
+
+            const product = products.find(p => p.id === productId);
+            const maxStock = product ? product.stock : item.maxStock;
+
+            item.quantity += change;
+
+            if (item.quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+
+            if (item.quantity > maxStock) {
+                showNotification('Максимальное количество: ' + maxStock + ' шт.', 'error');
+                item.quantity = maxStock;
+            }
+
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+
+        // Удаление из корзины
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id != productId);
+            saveCart();
+            updateCartCount();
+            renderCart();
+            showNotification('Товар удалён из корзины', 'info');
+        }
+
+        // Открытие формы оформления
+        function openCheckout() {
+            const summaryItems = document.getElementById('orderSummaryItems');
+            let totalItems = 0;
+
+            summaryItems.innerHTML = cart.map(item => {
+                totalItems += item.quantity;
+                return `
+                    <div class="order-summary-item">
+                        <span>${item.name}</span>
+                        <span>${item.quantity} шт.</span>
+                    </div>
+                `;
+            }).join('') + `
+                <div class="order-summary-item">
+                    <span>Итого:</span>
+                    <span>${totalItems} шт.</span>
+                </div>
+            `;
+
+            document.getElementById('checkoutModal').classList.add('open');
+            document.getElementById('cartModal').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('open');
+        }
+
+        // Закрытие формы оформления
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('open');
+        }
+
+        // Отправка заказа
+        async function submitOrder(event) {
+            event.preventDefault();
+
+            const btn = document.getElementById('btnSubmitOrder');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span> Отправка...';
+
+            const orderData = {
+                action: 'createOrder',
+                api_key: API_KEY,
+                name: document.getElementById('orderName').value,
+                phone: document.getElementById('orderPhone').value,
+                employees: document.getElementById('orderEmployees').value,
+                department: document.getElementById('orderDepartment').value,
+                comment: document.getElementById('orderComment').value,
+                items: cart,
+                total: cart.reduce((sum, item) => sum + item.quantity, 0)
+            };
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showNotification('✅ Заказ #' + result.orderId + ' успешно оформлен!', 'success');
+
+                    // Очистка корзины
+                    cart = [];
+                    saveCart();
+                    updateCartCount();
+                    closeCheckout();
+
+                    // Перезагрузка страницы через 2 секунды
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    throw new Error(result.error || 'Ошибка при создании заказа');
+                }
+            } catch (error) {
+                console.error('Order error:', error);
+                showNotification('Ошибка: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        }
+
+        // Уведомления
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type + ' show';
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        // ==========================================
+        // МОДАЛЬНОЕ ОКНО ТОВАРА
+        // ==========================================
+
+        let currentProduct = null;
+
+        // Открытие модального окна товара
+        function openProductModal(photoElement) {
+            const card = photoElement.closest('.merch-card');
+            const categoryBadge = card.querySelector('.merch-category-badge');
+            const title = card.querySelector('.merch-title').textContent;
+            const description = card.querySelector('.merch-description').textContent;
+            const details = card.querySelector('.merch-details');
+            const sizeSelector = card.querySelector('.size-selector');
+            const quantityInput = card.querySelector('.quantity-input');
+
+            // Сохраняем текущий товар
+            currentProduct = {
+                card: card,
+                title: title,
+                hasSizes: !!sizeSelector
+            };
+
+            // Заполняем модальное окно
+            document.getElementById('modalCategory').textContent = categoryBadge.textContent;
+            document.getElementById('modalCategory').className = 'product-modal-category ' + categoryBadge.className.split(' ')[1];
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+
+            // Копируем детали
+            const modalDetails = document.getElementById('modalDetails');
+            modalDetails.innerHTML = details.innerHTML;
+
+            // Копируем изображение
+            const modalImage = document.getElementById('modalImage');
+            const img = photoElement.querySelector('img');
+            const emoji = photoElement.querySelector('.photo-placeholder');
+            if (img) {
+                modalImage.innerHTML = `<img src="${img.src}" alt="${title}">`;
+            } else if (emoji) {
+                modalImage.innerHTML = `<div class="photo-placeholder">${emoji.textContent}</div>`;
+            }
+
+            // Показываем селектор размеров если есть
+            const modalSizeSelector = document.getElementById('modalSizeSelector');
+            const modalSizeSelect = document.getElementById('modalSizeSelect');
+            if (sizeSelector) {
+                modalSizeSelector.style.display = 'block';
+                modalSizeSelect.innerHTML = sizeSelector.querySelector('select').innerHTML;
+                modalSizeSelect.value = sizeSelector.querySelector('select').value;
+            } else {
+                modalSizeSelector.style.display = 'none';
+            }
+
+            // Устанавливаем максимальное количество
+            const maxStock = parseInt(quantityInput?.max) || 100;
+            const modalQuantity = document.getElementById('modalQuantity');
+            modalQuantity.max = maxStock;
+            modalQuantity.value = 1;
+
+            // Показываем модальное окно
+            document.getElementById('productModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Закрытие модального окна товара
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('open');
+            document.body.style.overflow = '';
+            currentProduct = null;
+        }
+
+        // Добавление товара из модального окна
+        document.getElementById('modalAddToCart')?.addEventListener('click', function() {
+            if (!currentProduct) return;
+
+            const card = currentProduct.card;
+            const sizeSelect = document.getElementById('modalSizeSelect');
+            const quantityInput = document.getElementById('modalQuantity');
+            const selectedSize = sizeSelect && sizeSelect.offsetParent !== null ? sizeSelect.value : null;
+            const quantity = parseInt(quantityInput.value) || 1;
+
+            // Получаем данные о продукте
+            const stockEl = card.querySelector('.merch-stock');
+            const imgEl = card.querySelector('.merch-photo img');
+            const emojiEl = card.querySelector('.photo-placeholder');
+            
+            let image = '📦';
+            if (imgEl) {
+                const src = imgEl.getAttribute('src') || imgEl.src;
+                image = src.includes('/') ? src.split('/').pop() : src;
+                // Добавляем префикс images/ если это файл изображения
+                if (image.includes('.') && !image.startsWith('images/')) {
+                    image = 'images/' + image;
+                }
+            } else if (emojiEl) {
+                image = emojiEl.textContent;
+            }
+
+            const product = {
+                id: currentProduct.title.replace(/\s+/g, '-'),
+                name: currentProduct.title,
+                stock: parseInt(stockEl.textContent) || 0,
+                image: image
+            };
+
+            // Создаём уникальный ID для товара с размером
+            const cartItemId = selectedSize ? `${product.id}-${selectedSize}` : product.id;
+            const itemName = selectedSize ? `${product.name} (размер: ${selectedSize})` : product.name;
+
+            const existingItem = cart.find(item => item.id === cartItemId);
+
+            if (existingItem) {
+                if (existingItem.quantity + quantity <= product.stock) {
+                    existingItem.quantity += quantity;
+                    showNotification(`Добавлено ${quantity} шт. в корзину`, 'success');
+                } else {
+                    showNotification('Превышено доступное количество', 'error');
+                    return;
+                }
+            } else {
+                cart.push({
+                    id: cartItemId,
+                    productId: product.id,
+                    name: itemName,
+                    baseName: product.name,
+                    size: selectedSize,
+                    price: product.price || 0,
+                    image: image,
+                    quantity: quantity,
+                    maxStock: product.stock
+                });
+                showNotification(`Добавлено ${quantity} шт. в корзину`, 'success');
+            }
+
+            saveCart();
+            updateCartCount();
+            closeProductModal();
+        });
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+            }
+        });
+
+        // Зум изображения в модальном окне
+        function toggleZoom(event) {
+            const modalImage = document.getElementById('modalImage');
+
+            // Игнорируем клик по подсказке
+            if (event.target.classList.contains('zoom-hint') || event.target.classList.contains('drag-hint')) return;
+
+            modalImage.classList.toggle('zoomed');
+
+            // Обновляем подсказку
+            const hint = modalImage.querySelector('.zoom-hint');
+            if (modalImage.classList.contains('zoomed')) {
+                hint.textContent = '✕ Нажмите для уменьшения';
+            } else {
+                hint.textContent = '🔍 Нажмите для увеличения';
+                // Сбрасываем позицию при уменьшении
+                modalImage.style.setProperty('--translate-x', '0px');
+                modalImage.style.setProperty('--translate-y', '0px');
+            }
+        }
+
+        // Перетаскивание изображения
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentTranslateX = 0, currentTranslateY = 0;
+
+        function initImageDrag() {
+            const modalImage = document.getElementById('modalImage');
+            if (!modalImage) return;
+
+            modalImage.addEventListener('mousedown', function(e) {
+                if (!modalImage.classList.contains('zoomed')) return;
+                e.preventDefault();
+                isDragging = true;
+                startX = e.clientX - currentTranslateX;
+                startY = e.clientY - currentTranslateY;
+                modalImage.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging || !modalImage.classList.contains('zoomed')) return;
+                e.preventDefault();
+                currentTranslateX = e.clientX - startX;
+                currentTranslateY = e.clientY - startY;
+                modalImage.style.setProperty('--translate-x', currentTranslateX + 'px');
+                modalImage.style.setProperty('--translate-y', currentTranslateY + 'px');
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (isDragging) {
+                    isDragging = false;
+                    if (modalImage) {
+                        modalImage.style.cursor = 'move';
+                    }
+                }
+            });
+
+            // Поддержка touch устройств
+            modalImage.addEventListener('touchstart', function(e) {
+                if (!modalImage.classList.contains('zoomed')) return;
+                isDragging = true;
+                const touch = e.touches[0];
+                startX = touch.clientX - currentTranslateX;
+                startY = touch.clientY - currentTranslateY;
+            });
+
+            modalImage.addEventListener('touchmove', function(e) {
+                if (!isDragging || !modalImage.classList.contains('zoomed')) return;
+                const touch = e.touches[0];
+                currentTranslateX = touch.clientX - startX;
+                currentTranslateY = touch.clientY - startY;
+                modalImage.style.setProperty('--translate-x', currentTranslateX + 'px');
+                modalImage.style.setProperty('--translate-y', currentTranslateY + 'px');
+            });
+
+            modalImage.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+        }
+
+        // Инициализация перетаскивания при открытии модального окна
+        const originalOpenProductModal = openProductModal;
+        openProductModal = function(photoElement) {
+            originalOpenProductModal(photoElement);
+            // Небольшая задержка чтобы DOM обновился
+            setTimeout(initImageDrag, 100);
+        };
+
+        // Сброс зума при закрытии модального окна
+        function closeProductModal() {
+            const modalImage = document.getElementById('modalImage');
+            modalImage.classList.remove('zoomed');
+
+            // Возвращаем оригинальную подсказку
+            const hint = modalImage.querySelector('.zoom-hint');
+            if (hint) {
+                hint.textContent = '🔍 Нажмите для увеличения';
+            }
+
+            // Сбрасываем позицию перетаскивания
+            modalImage.style.setProperty('--translate-x', '0px');
+            modalImage.style.setProperty('--translate-y', '0px');
+            currentTranslateX = 0;
+            currentTranslateY = 0;
+            isDragging = false;
+
+            document.getElementById('productModal').classList.remove('open');
+            document.body.style.overflow = '';
+            currentProduct = null;
+        }
+    </script>
+</body>
+</html>
